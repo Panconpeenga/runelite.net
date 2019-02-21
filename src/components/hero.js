@@ -16,7 +16,7 @@ function isOsCorrect(osName) {
     return false
   }
 
-  // const arch = platform.os.architecture
+  const arch = platform.os.architecture
   const family = platform.os.family.toLowerCase()
 
   if (family.indexOf('os x') !== -1 || family.indexOf('mac') !== -1) {
@@ -26,6 +26,10 @@ function isOsCorrect(osName) {
   if (family.indexOf('win') !== -1) {
     // return osName === (arch === 64 ? 'Windows64' : 'Windows32')
     return osName === 'Windows32'
+  }
+
+  if (family.indexOf('linux') !== -1) {
+    return osName === (arch === 64 ? 'Linux64' : 'Linux32')
   }
 
   return osName === family
@@ -117,14 +121,12 @@ class Hero extends Component {
             <p class="lead">
               <div class="btn-group dropdown">
                 <a
-                  type="button"
                   class={'btn btn-' + mainDropdownItem.color}
                   href={mainDropdownItem.link}
                 >
                   <i class={mainDropdownItem.icon} /> {mainDropdownItem.text}
                 </a>
                 <button
-                  type="button"
                   class={
                     'btn dropdown-toggle dropdown-toggle-split btn-' +
                     mainDropdownItem.color
@@ -143,7 +145,7 @@ class Hero extends Component {
               {regularButtons.map(({ link, color, icon, text }) => (
                 <span key={link}>
                   {' '}
-                  <a type="button" class={'btn btn-' + color} href={link}>
+                  <a class={'btn btn-' + color} href={link}>
                     <i class={icon} /> {text}
                   </a>
                   <br style={{ marginBottom: 10 }} class="d-md-none" />
